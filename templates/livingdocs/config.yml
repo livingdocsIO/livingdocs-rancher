@@ -1,0 +1,7 @@
+name: Livingdocs Demo
+description: Livingdocs cluster containing of a server, editor and the required services
+category: Applications
+version: 0
+maintainer: Livingdocs
+projectURL: https://livingdocs.io
+license: MIT

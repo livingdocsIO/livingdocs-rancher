@@ -1,0 +1,30 @@
+editor:
+  labels:
+    traefik.domain: ${domain}
+    traefik.port: '9000'
+    traefik.enable: 'true'
+  image: livingdocs/editor:master-3d4b57b222f6be1c73223bb34070fc53a681245b
+
+server:
+  environment:
+    ENVIRONMENT: local
+    db__host: postgres
+    search__host: http://elasticsearch:9200
+  labels:
+    traefik.domain: ${domain}
+    traefik.port: '9090'
+    traefik.enable: 'true'
+  command:
+    - bash
+    - -c
+    - node_modules/@livingdocs/server/bin/database.js create && node_modules/@livingdocs/server/bin/database.js enable-extensions && node index.js
+  image: livingdocs/service-server:master-8acd160a37f6a8e12649d1119af5f437634344af
+  links:
+  - elasticsearch:elasticsearch
+  - postgres:postgres
+
+postgres:
+  image: livingdocs/postgres:latest
+
+elasticsearch:
+  image: livingdocs/elasticsearch:latest

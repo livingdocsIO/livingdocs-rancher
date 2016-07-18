@@ -1,0 +1,7 @@
+name: Livingdocs Traefik
+description: Load balancer for livingdocs instances
+category: Applications
+version: 0
+maintainer: Livingdocs
+projectURL: https://livingdocs.io
+license: MIT

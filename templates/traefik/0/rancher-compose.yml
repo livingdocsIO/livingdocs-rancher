@@ -1,0 +1,36 @@
+.catalog:
+  name: Traefik
+  version: 0
+  description: Traefik for Livingdocs
+  minimum_rancher_version: v1.0.0
+
+haproxy:
+  scale: 2
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+traefik:
+  retain_ip: true
+  health_check:
+    port: 8000
+    interval: 5000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 5000
+    request_line: GET /dashboard/# HTTP/1.0
+    healthy_threshold: 2
+  metadata:
+    traefik: *id001
+
+traefik-conf:
+  retain_ip: true
+  metadata:
+    traefik: &id001
+      ssl_crt: ''
+      ssl_key: |2+
